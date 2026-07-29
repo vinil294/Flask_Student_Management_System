@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Student Management Dashboard</h2>
+<h3>Total Students : {{total}}</h3>
+<div class="dashboard">
+    <div class="card">
+        <h3>➕ Register Student</h3>
+        <a href="{{url_for('register')}}">
+            <button>Open</button>
+        </a>
+    </div>
+    <div class="card">
+        <h3>📋 View Students</h3>
+        <a href="{{url_for('view')}}">
+            <button>Open</button>
+        </a>
+    </div>
+    <div class="card">
+        <h3>🔍 Search Student</h3>
+        <a href="{{url_for('search')}}">
+            <button>Open</button>
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

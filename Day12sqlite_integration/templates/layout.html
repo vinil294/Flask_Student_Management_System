@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <script src="{{url_for('static',filename='js/script.js')}}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Student Management System</h1>
+        <nav>
+            <a href="{{url_for('dashboard')}}">Home</a>
+            <a href="{{url_for('register')}}">Register</a>
+            <a href="{{url_for('view')}}">View</a>
+            <a href="{{url_for('search')}}">Search</a>
+            <a href="{{url_for('delete')}}">Delete</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <hr>
+        <p>&copy; 2026 Student Management System | Developed using Flask & SQLite</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Student Registration</h2>
+
+{% for message in get_flashed_messages() %}
+<p>{{message}}</p>
+{% endfor %}
+
+<form method="POST">
+
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" value="{{name if name else ''}}" maxlength="50" required>
+    </div>
+
+    <div class="form-group">
+        <label>Roll Number</label>
+        <input type="text" name="roll_no" value="{{roll_no if roll_no else ''}}" maxlength="10" required>
+    </div>
+
+    <div class="form-group">
+        <label>Branch</label>
+        <select name="branch" required>
+            <option value="">Select Branch</option>
+            <option value="CSE" {% if branch=="CSE" %}selected{% endif %}>CSE</option>
+            <option value="ECE" {% if branch=="ECE" %}selected{% endif %}>ECE</option>
+            <option value="EEE" {% if branch=="EEE" %}selected{% endif %}>EEE</option>
+            <option value="MECH" {% if branch=="MECH" %}selected{% endif %}>MECH</option>
+            <option value="CIVIL" {% if branch=="CIVIL" %}selected{% endif %}>CIVIL</option>
+            <option value="AI&DS" {% if branch=="AI&DS" %}selected{% endif %}>AI&DS</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>CGPA</label>
+        <input type="number" name="cgpa" min="0" max="10" step="0.01" value="{{cgpa if cgpa else ''}}" required>
+    </div>
+
+    <div class="form-action">
+        <button type="submit">Register Student</button>
+        <button type="reset">Clear</button>
+    </div>
+
+</form>
+
+<br>
+
+<a href="{{url_for('dashboard')}}">
+    <button>Back to Dashboard</button>
+</a>
+
+{% endblock %}

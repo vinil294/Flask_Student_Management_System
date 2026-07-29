@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Search Student</h2>
+{% for message in get_flashed_messages() %}
+<p>{{message}}</p>
+{% endfor %}
+<form method="POST">
+    <label>Enter Roll Number</label><br><br>
+    <input type="text" name="roll_no" placeholder="Enter Roll Number" required>
+    <button type="submit">Search</button>
+</form>
+<br>
+{% if student %}
+<table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Roll Number</th>
+        <th>Branch</th>
+        <th>CGPA</th>
+        <th>Status</th>
+        <th>Edit</th>
+    </tr>
+    <tr>
+        <td>{{student[0]}}</td>
+        <td>{{student[1]}}</td>
+        <td>{{student[2]}}</td>
+        <td>{{student[3]}}</td>
+        <td>{{student[4]}}</td>
+        <td>
+            {% if student[4]>=9 %}
+                Excellent
+            {% elif student[4]>=8 %}
+                Very Good
+            {% elif student[4]>=7 %}
+                Good
+            {% elif student[4]>=6 %}
+                Average
+            {% else %}
+                Needs Improvement
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{url_for('update',student_id=student[0])}}">
+                <button>Edit</button>
+            </a>
+        </td>
+    </tr>
+</table>
+{% endif %}
+<br>
+<a href="{{url_for('dashboard')}}">
+    <button>Back</button>
+</a>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{%block content %}
+
+<h3>Delete Student Record:</h3>
+{% if student %}
+<table border="2">
+    <thead>
+        <tr>
+            <th> ID</th>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Branch</th>
+            <th>CGPA</th>
+            <th>Progress</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{student[0]}}</td>
+        <td>{{student[1]}}</td>
+        <td>{{student[2]}}</td>
+        <td>{{student[3]}}</td>
+        <td>{{student[4]}}</td>
+        <td>{% if student[4] >= 8.0 %}
+            <p class="cgpa-review1">Excellent</p>
+            {% elif student[4] >= 7.0 and student[4]< 8.0 %}
+            <p class="cgpa-review2">Good</p>
+            {% else %}
+            <p class="cgpa-review3">Need Improvement</p>
+            {% endif %}
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+ <a href="{{ url_for('delete') }}"><button>Delete Another</button></a>
+{% else %}
+<h2> Delete Student By Roll Number</h2>
+<form method="POST" action="">
+    <div class="form-group">
+        <label id="student_roll">Roll Number<input type="text" name="student_roll" maxlength="10" required> </label>
+    </div>
+    <div class="form-action">
+        <button class="submit-btn" type="submit">Submit</button>
+    </div>
+</form>
+{% endif %}
+ <a href="{{url_for('dashboard')}}"><button>Back to Dashboard</button></a>
+{%endblock %}
+

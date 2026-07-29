@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Student Details</h2>
+{% for message in get_flashed_messages() %}
+<p>{{message}}</p>
+{% endfor %}
+{% if result %}
+<table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Roll Number</th>
+        <th>Branch</th>
+        <th>CGPA</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    {% for student in result %}
+    <tr>
+        <td>{{student[0]}}</td>
+        <td>{{student[1]}}</td>
+        <td>{{student[2]}}</td>
+        <td>{{student[3]}}</td>
+        <td>{{student[4]}}</td>
+        <td>
+            {% if student[4] >= 9 %}
+                Excellent
+            {% elif student[4] >= 8 %}
+                Very Good
+            {% elif student[4] >= 7 %}
+                Good
+            {% elif student[4] >= 6 %}
+                Average
+            {% else %}
+                Needs Improvement
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{url_for('update',student_id=student[0])}}">
+                <button>Edit</button>
+            </a>
+        </td>
+        <td>
+            <form action="{{url_for('delete')}}" method="POST" onsubmit="return confirm('Delete this student?');">
+                <input type="hidden" name="student_roll" value="{{student[2]}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3>No Students Found</h3>
+{% endif %}
+<br>
+<a href="{{url_for('register')}}">
+    <button>Add Student</button>
+</a>
+<a href="{{url_for('dashboard')}}">
+    <button>Back</button>
+</a>
+{% endblock %}
