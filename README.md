@@ -64,7 +64,7 @@ Student_Management_System/
 Clone the repository
 
 ```bash
-git clone https://github.com/your-username/Student_Management_System.git
+git clone https://github.com/Madhavkris/Flask_Student_Management_System.git
 ```
 
 Go to the project folder
