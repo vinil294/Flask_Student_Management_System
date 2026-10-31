@@ -30,7 +30,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run automated tests
-        run: pytest -v
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -v
 
   deploy:
     name: Deploy to Render
