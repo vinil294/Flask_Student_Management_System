@@ -150,3 +150,47 @@ During this project, I learned:
 B.Tech (ECE) Student
 
 Learning Backend Development with Python & Flask
+
+
+---
+
+## ⚙️ CI/CD Pipeline (GitHub Actions)
+
+This repository uses GitHub Actions to automatically validate changes pushed to the `main` branch and pull requests targeting `main`.
+
+### Continuous Integration
+
+The workflow is defined in `.github/workflows/ci.yml` and performs these steps:
+
+1. Checks out the source code.
+2. Sets up Python 3.10, 3.11, and 3.12 using a build matrix.
+3. Installs dependencies from `requirements.txt`.
+4. Runs automated tests with `pytest`.
+5. Runs the Render deployment job only after the test matrix succeeds on pushes to `main`.
+
+### Run tests locally
+
+```bash
+python -m pip install -r requirements.txt
+python -m pytest -v
+```
+
+### Continuous Deployment (Render)
+
+The repository includes a `Procfile` for running the Flask application with Gunicorn.
+
+To enable automatic deployment:
+
+1. Create a Web Service on [Render](https://render.com/) and connect this repository.
+2. Use the build command: `pip install -r requirements.txt`.
+3. Use the start command: `gunicorn app:app`.
+4. In Render, create a Deploy Hook for the service.
+5. In GitHub, open **Settings → Secrets and variables → Actions → New repository secret**.
+6. Set the secret name to `RENDER_DEPLOY_HOOK` and paste the Deploy Hook URL as its value.
+
+The workflow safely skips the deployment request until this secret is configured. Once configured, a successful push to `main` triggers Render deployment after all tests pass.
+
+### Pipeline status
+
+[![Flask CI/CD](https://github.com/vinil294/Flask_Student_Management_System/actions/workflows/ci.yml/badge.svg)](https://github.com/vinil294/Flask_Student_Management_System/actions/workflows/ci.yml)
+
