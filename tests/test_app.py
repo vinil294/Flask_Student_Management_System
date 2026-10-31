@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+# Ensure the repository root is importable when pytest runs from CI.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import pytest
 
 import app as student_app
